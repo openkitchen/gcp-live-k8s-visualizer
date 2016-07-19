@@ -252,7 +252,7 @@ function connectServices(services, pods, jsPlumbInstance) {
  */
 function getNodeProvider(node) {
     if (!node || !node.spec || !node.spec.providerID) {
-        return 'pi';
+        return 'openstack';
     }
 
     const provider = node.spec.providerID.split(':')[0];
@@ -260,7 +260,7 @@ function getNodeProvider(node) {
     case 'gce':
         return 'gce';
     default:
-        return 'pi';
+        return 'openstack';
     }
 }
 
