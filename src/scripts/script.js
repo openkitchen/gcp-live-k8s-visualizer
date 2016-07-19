@@ -71,7 +71,7 @@ function loadData() {
     const serviceErrorElement = document.getElementById('service-error');
     const nodeErrorElement = document.getElementById('node-error');
 
-    const podsReq = getJson('/api/v1/pods?labelSelector=visualize%3Dtrue')
+    const podsReq = getJson('/api/v1/pods?labelSelector=app%3Disitup')
         .then((data) => {
             pods = data.items;
             hideError(podErrorElement);

@@ -22,6 +22,18 @@ function truncate(str, length, left) {
 }
 
 /**
+ * Return first part of node FQDN.
+ *
+ * @param str {string} The string.
+ */
+function nodeName(str) {
+    if (!str) {
+        return '';
+    }
+    return str.split('.')[0];
+}
+
+/**
  * For each property in object.
  *
  * @param {Object} object The object.

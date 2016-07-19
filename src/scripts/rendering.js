@@ -1,9 +1,9 @@
-/* global extractVersion, truncate, matchObjects */
+/* global extractVersion, truncate, nodeName, matchObjects */
 
 const CANVAS_NODES = '.nodesbar .canvas';
 const CANVAS_CLUSTER = '.cluster .canvas';
 
-const NODE_SPACE = 30;
+const NODE_SPACE = 90;
 const ENTITY_HEIGHT = 95;
 
 const SRV_POD_SPACE_HOR = 190;
@@ -80,6 +80,7 @@ function renderPods(pods, yOffset) {
     let renderedPods = '';
     pods.forEach(pod => {
         const name = pod.metadata.name;
+        const node = pod.spec.nodeName;
         const version = pod.metadata.labels.version;
         let phase = pod.status.phase ? pod.status.phase.toLowerCase() : '';
 
@@ -95,7 +96,7 @@ function renderPods(pods, yOffset) {
             <span>
             v.${extractVersion(pod.spec.containers[0].image)}
             ${version ? `<br/>${version}` : ''}<br/><br/>
-            ${name ? truncate(name, 28) : 'No name'}<br/><br/>
+            ${name ? nodeName(node) : 'No name'}<br/><br/>
             ${podIp ? `<em>${podIp}</em>` : `<em>${phase}</em>`}
             </span>
             </div>`;
@@ -245,14 +246,14 @@ function connectServices(services, pods, jsPlumbInstance) {
 
 /**
  * Get Node provider from provider ID.
- * Default to RaspberryPi.
+ * Default to OpenStack.
  *
  * @param {Object} node The node.
- * @returns Identified provider name or 'pi'.
+ * @returns Identified provider name or 'openstack'.
  */
 function getNodeProvider(node) {
     if (!node || !node.spec || !node.spec.providerID) {
-        return 'pi';
+        return 'openstack';
     }
 
     const provider = node.spec.providerID.split(':')[0];
@@ -260,7 +261,7 @@ function getNodeProvider(node) {
     case 'gce':
         return 'gce';
     default:
-        return 'pi';
+        return 'openstack';
     }
 }
 
@@ -289,8 +290,8 @@ function renderNodes(nodes) {
             <a href="http://${node.metadata.name}:4194/" target="_blank" rel="noreferrer nofollow"
             id="node-${node.metadata.name}" class="window node ${ready}" title="${node.metadata.name}" style="left: ${x}px">
             ${provider ? `<img src="assets/providers/${provider}.png" class="provider-logo" />` : ''}
-            <span><p class="nodetitle">Node</p><br/>
-            ${truncate(node.metadata.name, 12)}</span>
+            <span><p class="nodetitle">${nodeName(node.metadata.name)}</p><br/>
+            </span>
             </a>
             </div>`;
 
