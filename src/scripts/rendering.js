@@ -287,7 +287,7 @@ function renderNodes(nodes) {
 
         const nodeElement =
             `<div>
-            <a href="http://${node.metadata.name}:4194/" target="_blank" rel="noreferrer nofollow"
+            <a href="http://${node.status.addresses[0].address}:4194/" target="_blank" rel="noreferrer nofollow"
             id="node-${node.metadata.name}" class="window node ${ready}" title="${node.metadata.name}" style="left: ${x}px">
             ${provider ? `<img src="assets/providers/${provider}.png" class="provider-logo" />` : ''}
             <span><p class="nodetitle">${nodeName(node.metadata.name)}</p><br/>

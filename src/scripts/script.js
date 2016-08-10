@@ -71,7 +71,7 @@ function loadData() {
     const serviceErrorElement = document.getElementById('service-error');
     const nodeErrorElement = document.getElementById('node-error');
 
-    const podsReq = getJson('/api/v1/pods?labelSelector=app%3Disitup')
+    const podsReq = getJson('/api/v1/pods')
         .then((data) => {
             pods = data.items;
             hideError(podErrorElement);
@@ -80,7 +80,7 @@ function loadData() {
         });
     requests.push(podsReq);
 
-    const deploymentsReq = getJson('/apis/extensions/v1beta1/namespaces/default/deployments/?labelSelector=visualize%3Dtrue')
+    const deploymentsReq = getJson('/apis/extensions/v1beta1/namespaces/default/deployments/')
         .then((data) => {
             deployments = data.items;
             hideError(deploymentErrorElement);
@@ -89,7 +89,7 @@ function loadData() {
         });
     requests.push(deploymentsReq);
 
-    const servicesReq = getJson('/api/v1/services?labelSelector=visualize%3Dtrue')
+    const servicesReq = getJson('/api/v1/services')
         .then((data) => {
             services = data.items;
             hideError(serviceErrorElement);
