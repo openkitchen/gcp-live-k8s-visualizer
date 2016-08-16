@@ -7,7 +7,7 @@ This is a simple visualizer for use with the Kubernetes API.
 ### Usage:
    * First install a Kubernetes or Container Engine Cluster
    * Clone this repository
-   * Run the script `sh run.sh` or start the proxy manually with `kubectl proxy -w=src/`
+   * Run the script `sh run.sh` or start the proxy manually with `kubectl proxy -w=src/`, or `kubectl -s http://master:8080 proxy --www=src/ --address="0.0.0.0" --accept-hosts="^.*$"` (for demo only!)
 
 ### Prerequisites
 The visualizer uses labels to organize the visualization. To enable visualization of kubernetes entities set `visualize` to `true`.
