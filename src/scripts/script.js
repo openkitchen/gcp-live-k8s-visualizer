@@ -15,7 +15,7 @@ limitations under the License.
 */
 /* global jsPlumb, renderGroups, renderNodes, forProperty, matchObjects, addClass, removeClass */
 
-const UPDATE_INTERVAL = 3000;
+const UPDATE_INTERVAL = 1000;
 const REQUEST_TIMEOUT = 2000;
 
 let pods;
